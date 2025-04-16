@@ -1,0 +1,99 @@
+﻿<Window x:Class="DeltaDebugging.App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DeltaDebugging.App"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="800" Width="1300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Button x:Name="RunButton" Content="Run" Click="RunButton_Click"    
+                Margin="10" Width="100" Height="30"/>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <GroupBox Grid.Column="0" Header="Changes tested" Margin="5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,0">
+                        <TextBlock Text="Line Number" Height="20" Width="100"/>
+                        <TextBlock Text="Original Line" Height="20" Width="200"/>
+                        <TextBlock Text="New Line" Height="20" Width="200"/>
+                        <TextBlock Text="Test Result" Height="20" Width="100"/>
+                    </StackPanel>
+                    <ScrollViewer Grid.Row="1" Margin="10">
+                        <ItemsControl x:Name="ResultsPanel"/>
+                    </ScrollViewer>
+                </Grid>
+            </GroupBox>
+
+            <GroupBox Grid.Column="1" Header="Resolved" Margin="5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,0">
+                        <TextBlock Text="Line Number" Height="20" Width="100"/>
+                        <TextBlock Text="Original Line" Height="20" Width="200"/>
+                        <TextBlock Text="New Line" Height="20" Width="200"/>
+                    </StackPanel>
+                    <ScrollViewer Grid.Row="1" Margin="10">
+                        <ItemsControl x:Name="PassingComponents">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding LineNumber}" Height="20" Width="100"/>
+                                        <TextBlock Text="{Binding OriginalLine}" Height="20" Width="200"/>
+                                        <TextBlock Text="{Binding NewLine}" Height="20" Width="200"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Grid>
+            </GroupBox>
+
+        </Grid>
+
+        <GroupBox Grid.Row="2" Header="Result" Margin="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,0">
+                    <TextBlock Text="Line Number" Height="20" Width="100"/>
+                    <TextBlock Text="Original Line" Height="20" Width="300"/>
+                    <TextBlock Text="New Line" Height="20" Width="300"/>
+                </StackPanel>
+                <ScrollViewer Grid.Row="1" Margin="10">
+                    <ItemsControl x:Name="LastResult">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding LineNumber}" Height="20" Width="100"/>
+                                    <TextBlock Text="{Binding OriginalLine}" Height="20" Width="300"/>
+                                    <TextBlock Text="{Binding NewLine}" Height="20" Width="300"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+        </GroupBox>
+
+    </Grid>
+</Window>
